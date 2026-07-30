@@ -1,36 +1,103 @@
-![](https://miro.medium.com/max/2160/0*5Cke19b5MtU2WL5i.png)
+# Django Quiz Web App
 
-# Django quiz web app
+A server-rendered quiz and exam application built with Django. It supports
+categorized quizzes, configurable pass marks, randomized questions, single
+attempts, progress tracking, stored exam sittings, staff marking, and CSV-based
+user import. Content and questions are managed through Django's admin site.
 
-A simple quiz web app based on Django and SqlLite 
+## Project status
 
-<img alt="GitHub followers" src="https://img.shields.io/github/followers/kalifiabillal?color=yellow&label=kalifiabillal&style=for-the-badge">   <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/kalifiabillal/Android-Arduino-Automotive?style=for-the-badge">   <img alt="Visual Studio App Center (Minimum) OS Version" src="https://img.shields.io/visual-studio-app-center/releases/osver/kalifiabillal/Android-Arduino-Automotive/a87b9e745655355612fff4418953e0c3f7074250?style=for-the-badge">   <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/Kalifiabillal/Android-Arduino-Automotive?color=green&style=for-the-badge">   <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/y/kalifiabillal/Android-Arduino-Automotive?style=for-the-badge">
+This is a historical Django 2.2 project, not a production-ready service. Its
+pinned framework version is no longer supported, and the checked-in settings
+enable debug mode and contain a development secret key. Use an isolated,
+disposable environment for study or local evaluation; review and modernize the
+application before exposing it to a network.
 
-## Instructions 
+## What is included
 
-1) ### Installations
-  Make sure to have python version 3 install on you pc or laptop. 
-  If not install it from [here](https://www.python.org) <br>
-  **Clone repository** <br>
-  `https://github.com/sswapnil2/django-quiz-web-app.git`<br>
-  `cd django-quiz-web-app`
-  
-2) ### Installing dependencies 
-  It will install all required dependies in the project.<br>
-  `pip install -r requirements.txt`
-  
-3) ### Migrations 
-  To run migrations. <br>
-  `python manage.py makemigrations`<br>
-  `python manage.py migrate`
-  
-4) ### Create superuser
-  To create super user run. <br>
-  `python manage.py createsuperuser` <br>
-  After running this command it will ask for username, password.
-  You can access admin panel from `localhost:8000/admin/`
+- `quiz/`: quiz, category, question, sitting, progress, marking, and CSV import
+  models and views
+- `mcq/`: multiple-choice question support
+- `online_test/`: project URLs, settings, and WSGI entry point
+- SQLite as the default local database
+- Django admin at `/admin/`
 
-4) ### Running locally
-  To run at localhost. It will run on port 8000 by default.<br>
-  `python manage.py runserver` 
+The repository does not contain starter quiz data. Create an administrator and
+add categories, quizzes, and questions in the admin before using the quiz flow.
 
+## Local setup
+
+The dependency pins target the Python/Django ecosystem of 2020. Python 3.8 is a
+practical compatibility choice for the pinned Django 2.2 release.
+
+```bash
+git clone https://github.com/khlaifiabilel/Django-quiz-web-app.git
+cd Django-quiz-web-app
+python3.8 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
+```
+
+Open <http://127.0.0.1:8000/> for the application or
+<http://127.0.0.1:8000/admin/> to create content. `migrate` is sufficient for a
+fresh checkout because application migrations are already committed; do not run
+`makemigrations` as an installation step.
+
+## Checks
+
+With compatible dependencies installed:
+
+```bash
+python manage.py check
+python manage.py test
+```
+
+The checked-in test modules contain no substantive test cases, so a successful
+test command is primarily an import and configuration check.
+
+## Configuration and security
+
+`online_test/settings.py` is development configuration:
+
+- `SECRET_KEY` is committed and must not be reused for a deployment.
+- `DEBUG` is `True` and `ALLOWED_HOSTS` is empty.
+- Uploaded question figures and CSV files require a deliberate media-serving
+  and storage configuration outside Django's development server.
+- CSV import creates users from file contents, including passwords. Treat input
+  files as sensitive and review that workflow before use.
+- SQLite is suitable for local evaluation, not a multi-user production setup.
+
+Move secrets and deployment-specific values to environment-backed settings,
+disable debug mode, configure allowed hosts and media storage, and run Django's
+deployment checks before considering deployment.
+
+## Provenance
+
+This repository's Git history begins with an import by `kalifiabillal` on
+2021-02-21. The quiz implementation derives from the configurable
+[`tomwalker/django_quiz`](https://github.com/tomwalker/django_quiz) codebase via
+the related [`sswapnil2/django-quiz-app`](https://github.com/sswapnil2/django-quiz-app)
+project; class names and the historical setup reference preserve that lineage.
+Later code in this repository adds CSV-driven user creation. This repository is
+not marked as a GitHub fork, so that relationship is not represented by GitHub's
+fork metadata.
+
+## Known limitations
+
+- Django 2.2 and `django-model-utils` 3.1 are obsolete dependency lines.
+- There is no deployment configuration, package release, or supported hosted
+  instance.
+- CSV parsing assumes a specific comma/semicolon layout and has limited error
+  handling.
+- Automated behavioral coverage is effectively absent.
+
+## License
+
+No repository-level license file is present, and GitHub does not detect a
+license for either this repository or the identified upstream repositories.
+The absence of a license means no general permission to copy, modify, or
+redistribute the code is granted. Dependency licenses remain with their
+respective projects.
