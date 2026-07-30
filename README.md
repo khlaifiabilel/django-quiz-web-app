@@ -31,8 +31,8 @@ The dependency pins target the Python/Django ecosystem of 2020. Python 3.8 is a
 practical compatibility choice for the pinned Django 2.2 release.
 
 ```bash
-git clone https://github.com/khlaifiabilel/Django-quiz-web-app.git
-cd Django-quiz-web-app
+git clone https://github.com/khlaifiabilel/django-quiz-web-app.git
+cd django-quiz-web-app
 python3.8 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
