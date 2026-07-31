@@ -96,8 +96,8 @@ fork metadata.
 
 ## License
 
-No repository-level license file is present, and GitHub does not detect a
-license for either this repository or the identified upstream repositories.
-The absence of a license means no general permission to copy, modify, or
-redistribute the code is granted. Dependency licenses remain with their
-respective projects.
+This repository includes an [MIT License](LICENSE). The identified imported
+projects have no detected license, so this declaration should not be read as
+relicensing material for which the repository owner does not hold the necessary
+rights. Verify provenance and applicable terms before reusing imported source.
+Dependencies retain their respective licenses.
